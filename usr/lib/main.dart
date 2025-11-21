@@ -9,7 +9,7 @@ class Producto {
   final String id;
   final String nombre;
   final double precio;
-  final String categoria; // 'Ropa', 'Chuchería', 'Pan'
+  final String categoria; // 'Ropa', 'Chuchería', 'Pan', 'Escolar'
   final String imagenUrl;
 
   Producto({
@@ -69,6 +69,11 @@ class _PantallaTiendaState extends State<PantallaTienda> with SingleTickerProvid
     Producto(id: '7', nombre: 'Pan Baguette', precio: 1.20, categoria: 'Pan', imagenUrl: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=400&q=80'),
     Producto(id: '8', nombre: 'Pan de Molde', precio: 2.50, categoria: 'Pan', imagenUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80'),
     Producto(id: '9', nombre: 'Croissant', precio: 1.80, categoria: 'Pan', imagenUrl: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80'),
+
+    // Escolar
+    Producto(id: '10', nombre: 'Cuaderno Universitario', precio: 3.50, categoria: 'Escolar', imagenUrl: 'https://images.unsplash.com/photo-1531346878377-a513bc950634?auto=format&fit=crop&w=400&q=80'),
+    Producto(id: '11', nombre: 'Set de Lápices', precio: 5.00, categoria: 'Escolar', imagenUrl: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=400&q=80'),
+    Producto(id: '12', nombre: 'Mochila Escolar', precio: 25.00, categoria: 'Escolar', imagenUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=80'),
   ];
 
   // Estado del carrito: Mapa de ID de producto -> Cantidad
@@ -77,8 +82,8 @@ class _PantallaTiendaState extends State<PantallaTienda> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    // 4 pestañas: Todo, Ropa, Chuchería, Pan
-    _tabController = TabController(length: 4, vsync: this);
+    // 5 pestañas: Todo, Ropa, Chuchería, Pan, Escolar
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -233,11 +238,13 @@ class _PantallaTiendaState extends State<PantallaTienda> with SingleTickerProvid
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true, // Hacemos scrollable porque ahora son 5 pestañas
           tabs: const [
             Tab(icon: Icon(Icons.grid_view), text: 'Todo'),
             Tab(icon: Icon(Icons.checkroom), text: 'Ropa'),
             Tab(icon: Icon(Icons.icecream), text: 'Chuchería'),
             Tab(icon: Icon(Icons.bakery_dining), text: 'Pan'),
+            Tab(icon: Icon(Icons.school), text: 'Escolar'),
           ],
         ),
       ),
@@ -248,6 +255,7 @@ class _PantallaTiendaState extends State<PantallaTienda> with SingleTickerProvid
           _construirListaProductos('Ropa'),
           _construirListaProductos('Chuchería'),
           _construirListaProductos('Pan'),
+          _construirListaProductos('Escolar'),
         ],
       ),
       // Barra inferior flotante con el total
